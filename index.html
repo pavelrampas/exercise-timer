@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <title>Exercise Timer</title>
+    <meta name="description" content="Exercise Timer" />
+    <meta charset="UTF-8" />
+    <meta name="author" content="Pavel Rampas" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/index.min.css?v=1" />
+  </head>
+  <body>
+    <div id="timer" class="timer">0</div>
+    <div id="actual" class="actual">-</div>
+    <div id="next" class="next">-</div>
+    <br />
+    <div class="content">
+      <div class="buttons">
+        <input
+          type="button"
+          value="SAVE"
+          name="save"
+          id="save"
+          class="button"
+        />
+        <input
+          type="button"
+          value="START"
+          name="start"
+          id="start"
+          class="button"
+        />
+        <input
+          type="button"
+          value="PAUSE"
+          name="pause"
+          id="pause"
+          class="button"
+        />
+        <input
+          type="button"
+          value="STOP"
+          name="stop"
+          id="stop"
+          class="button"
+        />
+      </div>
+      <br />
+      <label for="textarea">Exercises:</label>
+      <textarea
+        rows="25"
+        name="textarea"
+        id="textarea"
+        class="textarea"
+      ></textarea>
+    </div>
+    <script src="/index.min.js?v=1"></script>
+  </body>
+</html>

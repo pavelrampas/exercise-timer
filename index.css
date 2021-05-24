@@ -1,0 +1,62 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.timer,
+.actual,
+.next {
+  text-align: center;
+  font-size: 5em;
+}
+
+.next {
+  font-size: 3em;
+  margin: 0.5em 0;
+}
+
+@media only screen and (max-width: 720px) {
+  .timer,
+  .actual,
+  .next {
+    font-size: 3em;
+  }
+
+  .next {
+    font-size: 1.5em;
+  }
+}
+
+.timer {
+  padding-top: 0.2em;
+}
+
+.actual {
+  padding-bottom: 0.2em;
+}
+
+.content {
+  max-width: 20em;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.textarea {
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.button {
+  padding: 0.5em;
+}
+
+.exercise-color {
+  background-color: #22c178;
+}
+
+.pause-color {
+  background-color: #ffdf7f;
+}
