@@ -26,6 +26,9 @@ let wakeLock = null;
 
 if (localStorage.getItem(storeExercises)) {
   textarea.value = localStorage.getItem(storeExercises);
+} else {
+  textarea.value =
+    '-příprava;10\n' + '+kliky;30\n' + '-pauza;20\n' + '+dřepy;30\n';
 }
 
 // onclick functions ----------------------------------------------------------
