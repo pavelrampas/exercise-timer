@@ -17,6 +17,7 @@ const audio = new Audio('whistle.mp3');
 let data = [];
 
 let stoptime = true;
+let pause = false;
 let sec = 0;
 let index = 0;
 
@@ -38,26 +39,35 @@ document.getElementById('save').onclick = function clickSave(e) {
 };
 
 document.getElementById('start').onclick = function clickStart(e) {
-  localStorage.setItem(storeExercises, textarea.value);
+  if (stoptime === true && pause === false) {
+    localStorage.setItem(storeExercises, textarea.value);
 
-  reset();
+    reset();
 
-  data = parseTextarea(localStorage.getItem(storeExercises).split('\n'));
+    data = parseTextarea(localStorage.getItem(storeExercises).split('\n'));
 
-  if ('wakeLock' in navigator) {
-    wakeLockRequest();
-  } else {
-    console.log('The Wake Lock is not supported');
+    if ('wakeLock' in navigator) {
+      wakeLockRequest();
+    } else {
+      console.log('The Wake Lock is not supported');
+    }
+
+    setUpAction(0);
+
+    stoptime = false;
+    timerCycle();
+  } else if (stoptime === true && pause === true) {
+    unPause();
   }
-
-  setUpAction(0);
-
-  stoptime = false;
-  timerCycle();
 };
 
 document.getElementById('pause').onclick = function clickPause(e) {
-  // TODO
+  if (stoptime == false && pause === false) {
+    stoptime = true;
+    pause = true;
+  } else if (stoptime === true && pause === true) {
+    unPause();
+  }
 };
 
 document.getElementById('stop').onclick = function clickStop(e) {
@@ -67,6 +77,14 @@ document.getElementById('stop').onclick = function clickStop(e) {
 };
 
 // functions ------------------------------------------------------------------
+
+function unPause() {
+  if (stoptime === true && pause === true) {
+    stoptime = false;
+    pause = false;
+    timerCycle();
+  }
+}
 
 async function wakeLockRequest() {
   try {
@@ -132,6 +150,7 @@ function setUpAction(newIndex) {
 
 function reset() {
   stoptime = true;
+  pause = false;
   sec = 0;
   index = 0;
   timer.innerHTML = sec;
