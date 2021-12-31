@@ -12,13 +12,15 @@ const typeExercise = 'exercise';
 const colorPause = 'pause-color';
 const colorExercise = 'exercise-color';
 
+const audio = new Audio('whistle.mp3');
+
 let data = [];
 
 let stoptime = true;
 let sec = 0;
 let index = 0;
 
-var audio = new Audio('whistle.mp3');
+let wakeLock = null;
 
 // code -----------------------------------------------------------------------
 
@@ -33,9 +35,17 @@ document.getElementById('save').onclick = function clickSave(e) {
 };
 
 document.getElementById('start').onclick = function clickStart(e) {
+  localStorage.setItem(storeExercises, textarea.value);
+
   reset();
 
   data = parseTextarea(localStorage.getItem(storeExercises).split('\n'));
+
+  if ('wakeLock' in navigator) {
+    wakeLockRequest();
+  } else {
+    console.log('The Wake Lock is not supported');
+  }
 
   setUpAction(0);
 
@@ -43,13 +53,37 @@ document.getElementById('start').onclick = function clickStart(e) {
   timerCycle();
 };
 
-document.getElementById('pause').onclick = function clickPause(e) {};
+document.getElementById('pause').onclick = function clickPause(e) {
+  // TODO
+};
 
 document.getElementById('stop').onclick = function clickStop(e) {
   reset();
+
+  wakeLockRelease();
 };
 
 // functions ------------------------------------------------------------------
+
+async function wakeLockRequest() {
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+  } catch (err) {
+    console.log(err);
+    console.log('The Wake Lock request has failed');
+  }
+}
+
+function wakeLockRelease() {
+  try {
+    wakeLock.release().then(() => {
+      wakeLock = null;
+    });
+  } catch (err) {
+    console.log(err);
+    console.log('The Wake Lock release has failed');
+  }
+}
 
 function timerCycle() {
   if (stoptime === false) {
