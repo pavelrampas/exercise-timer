@@ -123,7 +123,7 @@ function timerCycle() {
     sec = parseInt(sec) - 1;
     timer.innerHTML = sec;
 
-    setTimeout('timerCycle()', 1000);
+    setTimeout(timerCycle, 1000);
   }
 }
 
