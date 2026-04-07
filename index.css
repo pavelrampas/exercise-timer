@@ -41,7 +41,7 @@ body {
 }
 
 .textarea {
-  width: 100%;
+  width: 90%;
 }
 
 .buttons {
@@ -49,8 +49,33 @@ body {
   justify-content: space-around;
 }
 
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0.3em;
+}
+
 .button {
   padding: 0.5em;
+  appearance: none;
+  -moz-appearance: none;
+  background-color: #eee;
+  border-radius: 0.3em;
+  border: 1px solid #aaa;
+}
+
+.button:hover {
+  background-color: #ddd;
+}
+
+.tab-btn {
+  flex: 1;
+  margin: 0 0.2em;
+}
+
+.tab-btn.active {
+  background-color: #22c178;
+  font-weight: bold;
 }
 
 .exercise-color {
